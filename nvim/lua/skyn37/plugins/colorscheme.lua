@@ -1,14 +1,22 @@
 return {
-  { 
-     'rose-pine/neovim', 
-     name = 'rose-pine',
-     lazy = false,
-     priority = 1000,
-       config = function()
-       -- load the colorscheme here
-       vim.cmd([[colorscheme rose-pine]])
-       end,
-   },  
+  {
+    "morhetz/gruvbox",
+    lazy = false, -- Load immediately
+    priority = 1000, -- Ensure it loads before other UI plugins
+    config = function()
+      vim.cmd("colorscheme gruvbox") -- Apply the theme
+    end,
+  },
+--  {
+--     'rose-pine/neovim', 
+--     name = 'rose-pine',
+--     lazy = false,
+--     priority = 1000,
+--       config = function()
+--       -- load the colorscheme here
+--       vim.cmd([[colorscheme rose-pine]])
+--       end,
+--   },
 --    {
 --      "folke/tokyonight.nvim",
 --     priority = 1000, -- make sure to load this before all the other start plugins

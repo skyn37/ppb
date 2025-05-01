@@ -43,6 +43,28 @@ return {
                     local lua_opts = lsp_zero.nvim_lua_ls()
                     require('lspconfig').lua_ls.setup(lua_opts)
                 end,
+                clangd = function()
+                    require('lspconfig').clangd.setup({
+                        cmd = { 
+                            "clangd", 
+                            "--background-index",  -- Enable faster symbol searching
+                            "--clang-tidy",        -- Enable clang-tidy for warnings
+                            "--completion-style=detailed", -- Better autocompletion
+                            "--header-insertion=never",   -- Prevents slow automatic header insertion
+                            "--pch-storage=memory"        -- Speeds up precompiled headers
+                        },
+                        on_attach = function(client, bufnr)
+                            -- Delay diagnostics to avoid running on every keystroke
+                            vim.lsp.handlers["textDocument/publishDiagnostics"] = function(_, result, ctx, config)
+                                config = config or {}
+                                config.update_in_insert = false -- Don't update diagnostics while typing
+                                config.severity_sort = true -- Sort by severity
+                                return vim.lsp.diagnostic.on_publish_diagnostics(_, result, ctx, config)
+                            end
+                        end,
+                        capabilities = lsp_zero.capabilities
+                    })
+                end,
             },
         })
 

@@ -26,3 +26,8 @@ vim.api.nvim_set_keymap(
     ":silent !npx prettier --write %<CR> | edit!<CR>",
     { noremap = true, silent = true }
 )
+-- arrow keys now move between windows
+vim.api.nvim_set_keymap("n", "<Up>", "<C-w>k", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<Down>", "<C-w>j", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<Left>", "<C-w>h", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<Right>", "<C-w>l", { noremap = true, silent = true })
